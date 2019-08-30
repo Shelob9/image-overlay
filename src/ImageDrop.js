@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "@emotion/styled";
 //Based on https://www.bignerdranch.com/blog/dont-over-react-rendering-binary-data/
+import {ImageWithOverlay} from './ImageWithOverlay';
 
 let urls = new WeakMap();
 
@@ -48,10 +49,11 @@ const Wrapper = styled.div({
   render() {
     let { file } = this.state;
     let url = file && blobUrl(file);
+    const {overlayText} = this.props;
 
     return (
       <Wrapper onDragOver={this.onDrag} onDrop={this.onDrop}>
-        {file ? <Img src={url} /> : <p>Drop an image!</p>}
+        {file ? <ImageWithOverlay src={url} text={overlayText} /> : <p>Drop an image!</p>}
       </Wrapper>
     );
   }
